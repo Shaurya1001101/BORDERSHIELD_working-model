@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BORDERSHIELD — AI Media Forensics &amp; Anomaly Detection</title>
+<meta name="description" content="Client-side AI-generated media detection and file anomaly scanning. Runs entirely in your browser — no uploads to any server."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="boot-screen">
+  <div class="boot-logo">
+    <div class="boot-emblem">
+      <div class="emblem-ring outer"></div>
+      <div class="emblem-ring inner"></div>
+      <div class="emblem-center">&#128270;</div>
+    </div>
+    <h1 class="boot-title">BORDERSHIELD</h1>
+    <p class="boot-sub">AI Media Forensics &amp; Anomaly Detection</p>
+    <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
+    <p class="boot-status" id="boot-status">Loading forensic modules…</p>
+    <p class="boot-ps">Runs 100% client-side — nothing you analyze leaves this browser tab</p>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">&#128270;</div>
+      <div><div class="logo-text">BORDERSHIELD</div><div class="logo-sub">by Jugadu_Coders;</div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')"><span class="nav-icon">&#128202;</span><span>Dashboard</span></a>
+      <a class="nav-item" data-page="detect" onclick="navigate('detect')"><span class="nav-icon">&#129504;</span><span>AI Media Detection</span></a>
+      <a class="nav-item" data-page="anomaly" onclick="navigate('anomaly')"><span class="nav-icon">&#9888;&#65039;</span><span>Anomaly Detection</span></a>
+      <a class="nav-item" data-page="log" onclick="navigate('log')"><span class="nav-icon">&#128220;</span><span>Session Log <span class="badge" id="log-badge">0</span></span></a>
+      <a class="nav-item" data-page="methodology" onclick="navigate('methodology')"><span class="nav-icon">&#128218;</span><span>Methodology</span></a>
+      <a class="nav-item" data-page="settings" onclick="navigate('settings')"><span class="nav-icon">&#9881;&#65039;</span><span>Settings</span></a>
+    </nav>
+    <div class="sidebar-status">
+      <div class="status-row"><span class="status-dot green"></span><span>Engine ready (local)</span></div>
+      <div class="status-row"><span class="status-dot" id="online-status-dot"></span><span id="online-status-text">Checking connectivity…</span></div>
+    </div>
+    <div class="sidebar-footer">
+      <p>No file is ever uploaded anywhere by this app. All analysis (ELA, frequency, metadata, entropy…) runs locally in your browser.</p>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+        <div class="breadcrumb" id="breadcrumb">Dashboard</div>
+      </div>
+      <div class="topbar-right">
+        <div class="clock" id="clock">--:--:--</div>
+        <div class="privacy-badge">&#128274; Local-only analysis</div>
+      </div>
+    </header>
+
+    <!-- ============ DASHBOARD ============ -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header"><h1>Session Overview</h1><p>Real counts from files you've analyzed in this browser session — nothing simulated, nothing pre-loaded.</p></div>
+      <div class="stats-grid">
+        <div class="stat-card blue-glow"><div class="stat-icon">&#128193;</div><div class="stat-value" id="stat-total">0</div><div class="stat-label">Files Analyzed</div></div>
+        <div class="stat-card green-glow"><div class="stat-icon">&#9989;</div><div class="stat-value" id="stat-clean">0</div><div class="stat-label">No Strong Indicators</div></div>
+        <div class="stat-card amber-glow"><div class="stat-icon">&#10067;</div><div class="stat-value" id="stat-uncertain">0</div><div class="stat-label">Inconclusive / Weak Signals</div></div>
+        <div class="stat-card red-glow"><div class="stat-icon">&#128680;</div><div class="stat-value" id="stat-flagged">0</div><div class="stat-label">Strong AI/Anomaly Indicators</div></div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header"><h3>&#128202; Verdict Breakdown</h3></div>
+          <div id="dashboard-empty" class="empty-state">
+            <div class="empty-icon">&#128270;</div>
+            <p>No files analyzed yet this session.</p>
+            <button class="action-btn green-btn" onclick="navigate('detect')">Analyze a file →</button>
+          </div>
+          <div class="donut-wrap hidden" id="dashboard-chart-wrap">
+            <canvas id="donut-chart" width="180" height="180"></canvas>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>&#128203; What this tool actually does</h3></div>
+          <ul class="feature-list">
+            <li><b>AI Media Detection</b> — upload an image, video, or audio file; get a real, explainable analysis combining metadata forensics, Error Level Analysis, frequency-spectrum analysis, and noise-pattern checks.</li>
+            <li><b>Anomaly Detection</b> — upload any file; get file-structure validation, entropy scanning, hidden/appended-data detection, extension-mismatch checks, and steganalysis.</li>
+            <li><b>Cross-check online</b> — one-click links to real third-party detectors (Content Credentials, Hive, Illuminarty, FotoForensics, reverse image search, VirusTotal) for a second opinion.</li>
+            <li>Everything above runs <b>locally in this browser tab</b>. No file is uploaded anywhere unless you explicitly click an outbound tool link or opt in to the Sightengine API in Settings.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card mt-20" id="recent-activity-card" style="display:none">
+        <div class="card-header"><h3>&#128337; Recent Analyses</h3></div>
+        <div class="live-feed-table">
+          <table>
+            <thead><tr><th>Time</th><th>File</th><th>Type</th><th>Score</th><th>Verdict</th><th></th></tr></thead>
+            <tbody id="recent-activity-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ AI MEDIA DETECTION ============ -->
+    <div class="page" id="page-detect">
+      <div class="page-header"><h1>&#129504; AI Media Detection</h1><p>Upload an image, video, or audio file. Analysis runs entirely on-device.</p></div>
+      <div class="scan-layout">
+        <div class="scan-left">
+          <div class="card">
+            <div class="card-header"><h3>&#128196; Media Input</h3></div>
+            <div class="upload-zone" id="detect-upload-zone">
+              <input type="file" id="detect-file-input" accept="image/*,video/*,audio/*" style="display:none"/>
+              <div class="upload-icon">&#128228;</div>
+              <p>Click or drag a file here</p>
+              <p class="upload-sub">Images (JPEG/PNG/WebP/GIF/BMP/TIFF) · Video (MP4/MOV/WebM) · Audio (MP3/WAV/OGG/FLAC)</p>
+            </div>
+            <div id="detect-file-info" class="file-info hidden"></div>
+          </div>
+          <div class="card" id="detect-preview-card" style="display:none">
+            <div class="card-header"><h3>Preview</h3></div>
+            <div id="detect-preview"></div>
+          </div>
+          <div class="card" id="detect-progress-card" style="display:none">
+            <div class="card-header"><h3>Pipeline Progress</h3></div>
+            <div class="processing-steps" id="detect-steps"></div>
+          </div>
+        </div>
+        <div class="scan-right">
+          <div class="card" id="detect-results-placeholder">
+            <div class="empty-state">
+              <div class="empty-icon">&#128269;</div>
+              <p style="font-size:13px">Upload a file to begin analysis</p>
+            </div>
+          </div>
+          <div id="detect-results" class="hidden"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ANOMALY DETECTION ============ -->
+    <div class="page" id="page-anomaly">
+      <div class="page-header"><h1>&#9888;&#65039; Anomaly Detection</h1><p>Upload any file to check its structural integrity, hidden data, and byte-level anomalies.</p></div>
+      <div class="scan-layout">
+        <div class="scan-left">
+          <div class="card">
+            <div class="card-header"><h3>&#128196; File Input</h3></div>
+            <div class="upload-zone" id="anomaly-upload-zone">
+              <input type="file" id="anomaly-file-input" style="display:none"/>
+              <div class="upload-icon">&#128193;</div>
+              <p>Click or drag any file here</p>
+              <p class="upload-sub">Works on any file type — images, documents, archives, executables, media…</p>
+            </div>
+            <div id="anomaly-file-info" class="file-info hidden"></div>
+          </div>
+          <div class="card" id="anomaly-entropy-card" style="display:none">
+            <div class="card-header"><h3>Entropy Map</h3></div>
+            <canvas id="anomaly-entropy-canvas" width="480" height="140"></canvas>
+            <p class="muted small mt-8">Shannon entropy (bits/byte) across sequential windows of the file. Spikes above the file's own baseline are flagged below.</p>
+          </div>
+          <div class="card" id="anomaly-progress-card" style="display:none">
+            <div class="card-header"><h3>Scan Progress</h3></div>
+            <div class="processing-steps" id="anomaly-steps"></div>
+          </div>
+        </div>
+        <div class="scan-right">
+          <div class="card" id="anomaly-results-placeholder">
+            <div class="empty-state">
+              <div class="empty-icon">&#9888;&#65039;</div>
+              <p style="font-size:13px">Upload a file to begin scanning</p>
+            </div>
+          </div>
+          <div id="anomaly-results" class="hidden"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SESSION LOG ============ -->
+    <div class="page" id="page-log">
+      <div class="page-header"><h1>Session Log</h1><p>Every analysis you've run this session. Cleared on page reload — nothing is saved to disk or any server.</p></div>
+      <div class="card">
+        <div class="card-header"><h3>History</h3><div style="display:flex;gap:8px"><button class="action-btn" onclick="exportSessionReport()">Export Report (JSON)</button><button class="action-btn" onclick="clearSessionLog()">Clear Log</button></div></div>
+        <div id="log-empty" class="empty-state">
+          <div class="empty-icon">&#128220;</div>
+          <p>No analyses yet this session.</p>
+        </div>
+        <div class="live-feed-table hidden" id="log-table-wrap">
+          <table>
+            <thead><tr><th>Time</th><th>File</th><th>Size</th><th>Type</th><th>Score</th><th>Verdict</th><th>SHA-256</th></tr></thead>
+            <tbody id="log-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ METHODOLOGY ============ -->
+    <div class="page" id="page-methodology">
+      <div class="page-header"><h1>&#128218; Methodology &amp; Honest Limitations</h1><p>Exactly what runs, how it works, and what it can't tell you.</p></div>
+      <div class="method-grid" id="methodology-content"></div>
+    </div>
+
+    <!-- ============ SETTINGS ============ -->
+    <div class="page" id="page-settings">
+      <div class="page-header"><h1>&#9881;&#65039; Settings</h1><p>Optional, advanced, entirely off by default.</p></div>
+      <div class="card" style="max-width:640px">
+        <div class="card-header"><h3>Optional: Live Sightengine API</h3></div>
+        <p class="muted small">Sightengine (<a href="https://sightengine.com/docs/ai-generated-image-detection" target="_blank" rel="noopener">sightengine.com</a>) offers a documented public API with a free tier. If you have your own <code>api_user</code>/<code>api_secret</code>, this app can call their real <code>genai</code> model directly from your browser for a second, model-based opinion alongside the local heuristics. Nothing is sent anywhere unless you fill this in and it is used only for files you explicitly analyze.</p>
+        <div class="form-row"><label>API User</label><input type="text" id="se-api-user" placeholder="e.g. 123456789" autocomplete="off"/></div>
+        <div class="form-row"><label>API Secret</label><input type="password" id="se-api-secret" placeholder="your api secret" autocomplete="off"/></div>
+        <button class="action-btn green-btn" onclick="saveSightengineKeys()">Save for this session</button>
+        <p class="muted small mt-8" id="se-save-status"></p>
+        <p class="muted small mt-8">⚠️ Kept in memory only — cleared when you reload or close this tab. Calls may be blocked by your browser/network's CORS policy; if so, the local analysis and link-out tools still work fine.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/utils.js"></script>
+<script src="js/fft.js"></script>
+<script src="js/signatures.js"></script>
+<script src="js/metadata-image.js"></script>
+<script src="js/metadata-container.js"></script>
+<script src="js/image-forensics.js"></script>
+<script src="js/trained-model.js"></script>
+<script src="js/video-forensics.js"></script>
+<script src="js/audio-forensics.js"></script>
+<script src="js/anomaly-detection.js"></script>
+<script src="js/online-tools.js"></script>
+<script src="js/viz.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
