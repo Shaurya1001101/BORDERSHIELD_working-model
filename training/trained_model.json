@@ -1,0 +1,152 @@
+{
+  "features": [
+    "aspect",
+    "isSquarePow2",
+    "megapixels",
+    "hasCameraExif",
+    "hasPipelineTag",
+    "elaGlobalMean",
+    "elaGlobalStd",
+    "elaHotBlockRatio",
+    "elaMaxBlock",
+    "noiseMeanEnergy",
+    "noiseStdEnergy",
+    "noiseCoeffVar",
+    "freqHighBand",
+    "freqMidBand",
+    "freqHighMidRatio",
+    "freqMaxProminence",
+    "freqMeanProminence",
+    "freqOutlierRatio",
+    "lsbMaxP",
+    "lsbHighPWindows"
+  ],
+  "params": [
+    {
+      "feature": "aspect",
+      "mean": 1.3033735968973814,
+      "std": 0.36858105525899487,
+      "coef": 0.3179675445053912
+    },
+    {
+      "feature": "isSquarePow2",
+      "mean": 0.09154929577464789,
+      "std": 0.2883886652034263,
+      "coef": 1.942226795216888
+    },
+    {
+      "feature": "megapixels",
+      "mean": 4.895327211267605,
+      "std": 9.619710372668948,
+      "coef": -3.118892718830872
+    },
+    {
+      "feature": "hasCameraExif",
+      "mean": 0.02112676056338028,
+      "std": 0.14380688631452207,
+      "coef": -1.1399921606464434
+    },
+    {
+      "feature": "hasPipelineTag",
+      "mean": 0.11971830985915492,
+      "std": 0.32463184708777765,
+      "coef": -0.27179340958412807
+    },
+    {
+      "feature": "elaGlobalMean",
+      "mean": 1.1263497071072608,
+      "std": 0.8005261085812082,
+      "coef": 0.8035358457343061
+    },
+    {
+      "feature": "elaGlobalStd",
+      "mean": 0.682016094238175,
+      "std": 0.39708654544416394,
+      "coef": -0.03728741051328767
+    },
+    {
+      "feature": "elaHotBlockRatio",
+      "mean": 0.04040348142870544,
+      "std": 0.01766707342383805,
+      "coef": 0.015678202641156554
+    },
+    {
+      "feature": "elaMaxBlock",
+      "mean": 4.292395733301323,
+      "std": 2.152845990689506,
+      "coef": 0.03297927214360555
+    },
+    {
+      "feature": "noiseMeanEnergy",
+      "mean": 9.394712702412027,
+      "std": 5.5397488875129515,
+      "coef": -1.2521572497204356
+    },
+    {
+      "feature": "noiseStdEnergy",
+      "mean": 8.50300080479998,
+      "std": 3.850938385874368,
+      "coef": -0.6751795734587459
+    },
+    {
+      "feature": "noiseCoeffVar",
+      "mean": 1.0306870783803737,
+      "std": 0.37286144619876277,
+      "coef": 0.35858387789331114
+    },
+    {
+      "feature": "freqHighBand",
+      "mean": 3.488770750313431,
+      "std": 0.18862615094071783,
+      "coef": 2.674606022238559
+    },
+    {
+      "feature": "freqMidBand",
+      "mean": 3.9697789067738043,
+      "std": 0.14084441060807756,
+      "coef": -0.9842172789791981
+    },
+    {
+      "feature": "freqHighMidRatio",
+      "mean": 0.8785528374037739,
+      "std": 0.028629813621863964,
+      "coef": -1.3533862306279916
+    },
+    {
+      "feature": "freqMaxProminence",
+      "mean": 0.725621796664752,
+      "std": 0.11874673624322951,
+      "coef": -0.034240175992285744
+    },
+    {
+      "feature": "freqMeanProminence",
+      "mean": -0.00010139112390275494,
+      "std": 0.0001102024243941246,
+      "coef": 0.22196991358110948
+    },
+    {
+      "feature": "freqOutlierRatio",
+      "mean": 4.3183477310633797e-07,
+      "std": 5.12775382094306e-06,
+      "coef": -0.4170008251946674
+    },
+    {
+      "feature": "lsbMaxP",
+      "mean": 0.8466423697604973,
+      "std": 0.32880696757352434,
+      "coef": -0.048887501509190315
+    },
+    {
+      "feature": "lsbHighPWindows",
+      "mean": 9.133802816901408,
+      "std": 9.48922953078275,
+      "coef": -0.07785645545177698
+    }
+  ],
+  "intercept": -0.3209899962865152,
+  "cv_roc_auc": 0.7513888888888889,
+  "cv_accuracy": 0.7253521126760564,
+  "n_train": 142,
+  "n_ai": 72,
+  "n_real": 70
+}
